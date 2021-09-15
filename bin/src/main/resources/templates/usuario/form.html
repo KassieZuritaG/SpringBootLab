@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead">
+</head>
+<body>
+
+	<div id="wrapper">
+		<ul th:replace="layout :: frgSideBar"></ul>
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+
+				<nav th:replace="layout :: frgTopBar"></nav>
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<div class="container">
+
+						<div class="card o-hidden border-0 shadow-lg my-5">
+							<div class="card-body p-0">
+								<div class="col-lg-6">
+									<div class="p-5">
+										<div class="text-center">
+											<h1 th:text="${title}" class="h4 text-gray-900 mb-4"></h1>
+										</div>
+										<form th:action="@{/usuario/save}" th:object="${usuario}"
+											class="user" method="post">
+											<hr>
+											<div class="form-group">
+
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i
+															class="fas fa-user-tie"></i></span>
+													</div>
+													<input type="text" class="form-control"
+														th:errorclass="'form-control is-invalid'"
+														th:field="*{nombre}" placeholder="Nombre de usuario" /> <small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('nombre')}"
+														th:errors="*{nombre}"></small>
+												</div>
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i
+															class="fas fa-key"></i></span>
+													</div>
+													<input type="password" class="form-control"
+														th:errorclass="'form-control is-invalid'"
+														th:field="*{password}" placeholder="Password" /><small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('password')}"
+														th:errors="*{password}"></small>
+												</div>
+												<hr>
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i
+															class="far fa-address-card"></i></span>
+													</div>
+													<input type="text" class="form-control"
+														th:field="*{cedula}"
+														th:errorclass="'form-control is-invalid'"
+														placeholder="C&eacute;dula"> <small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('cedula')}"
+														th:errors="*{cedula}"></small>
+												</div>
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i
+															class="fas fa-user-tie"></i></span>
+													</div>
+													<input type="text" class="form-control"
+														th:errorclass="'form-control is-invalid'"
+														th:field="*{nombres}" placeholder="Nombres" /> <small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('nombres')}"
+														th:errors="*{nombres}"></small>
+												</div>
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i
+															class="fas fa-user-tie"></i></span>
+													</div>
+													<input type="text" class="form-control"
+														th:errorclass="'form-control is-invalid'"
+														th:field="*{apellidos}" placeholder="Apellidos" /> <small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('apellidos')}"
+														th:errors="*{apellidos}"></small>
+												</div>
+
+												<div class="btn-group">
+													<button type="submit" class="btn btn-success">
+														<i class="fas fa-save"></i> &nbsp;Guardar
+													</button>
+													<a th:href="@{/}" class="btn btn-danger"> <i
+														class="fas fa-times"></i> &nbsp;Cancelar
+													</a>
+												</div>
+
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

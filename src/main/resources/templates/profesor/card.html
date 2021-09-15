@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+	<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<header th:replace="layout :: frgHeader"></header>
+
+	<div class="breadcumb-area bg-img"
+		th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">
+		<div class="bradcumbContent">
+			<h2>Profesores</h2>
+		</div>
+	</div>
+
+	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+		<section class="contact-area mt-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="contact-content">
+							<div class="row">
+								<div class="col-12">
+									<div class="row">
+										<div class=col-10>
+											<span>Contenido</span>
+											<h4 th:text="${title}"></h4>
+										</div>
+										<div class=col-2>
+											<img th:src="@{/photos/profesores/} + ${profesor.imagen}" width="100"
+												height="100" />
+										</div>
+									</div>
+
+									<!-- ##### Tabs ##### -->
+									<div class="col-12">
+										<div class="academy-tabs-content">
+											<ul class="nav nav-tabs" id="myTab" role="tablist">
+												<li class="nav-item"><a class="nav-link active"
+													id="tab--1" data-toggle="tab" href="#tab1" role="tab"
+													aria-controls="tab1" aria-selected="false">Datos
+														generales</a></li>
+												<li class="nav-item"><a class="nav-link" id="tab--2"
+													data-toggle="tab" href="#tab2" role="tab"
+													aria-controls="tab2" aria-selected="false">Aulas</a>
+												</li>
+												
+											</ul>
+
+											<div class="tab-content mb-100" id="myTabContent">
+												<div class="tab-pane fade show active" id="tab1"
+													role="tabpanel" aria-labelledby="tab--1">
+													<div class="academy-tab-content">
+														<!-- Tab Text -->
+														<div class="academy-tab-text">
+															<div class="contact-form-area wow fadeInUp"
+																data-wow-delay="500ms">
+																<form th:object="${profesor}" method="post">
+																<div class="col-5">	
+																	<h4 class="label">Datos Personales</h4>												
+																	
+																</div>	
+																<div class="row d-flex align-items-center">
+																		<div class="col-1">
+																			<i class="fas fa-user-tie fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{nombres}" readonly />
+																		</div>
+																		<div class="col-1">
+																			<i class="fas fa-user-tie fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{apellidos}" readonly />
+																		</div>
+																	</div>
+																	<div class="row d-flex align-items-center">
+																		<div class="col-1">
+																			<i class="far fa-address-card fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{cedula}" readonly />
+																		</div>
+																		<div class="col-1">
+																			<i class="fas fa-at fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{email}" readonly />
+																		</div>
+																		
+																	</div>
+																	
+																	<div class="row d-flex align-items-center">
+																		<div class="col-1">
+																			<i class="fas fa-phone fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{telefono}" readonly />
+																		</div>
+																		<div class="col-1">
+																			<i class="fas fa-venus-mars fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:value="${profesor.sexoDesc()}" readonly/>
+																		</div>
+
+																	</div>
+																	<div class="row d-flex align-items-center">
+																		<div class="col-1">
+																			<i class="fas fa-calendar-alt fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="date" class="form-control"
+																				th:field="*{fechaNacimiento}" readonly />
+																		</div>
+																		<div class="col-1">
+																			<i class="fas fa-map-marker-alt fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{lugarNacimiento}" readonly/>
+																		</div>
+																	</div>
+																	
+																	
+																	<div class="col-5">	
+																				<h4 class="label">Datos Profesionales</h4>												
+																	</div>											
+																	
+																
+																	<div class="row d-flex align-items-center">
+																		<div class="col-1">
+																			<i class="fas fa-university fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{titulo}" readonly />
+																		</div>
+																		<div class="col-1">
+																			<i class="fas fa-business-time fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{tiempoDedicacion}" readonly/>
+																		</div>
+																	</div>
+																	<div class="col-5">
+																			<h6 class="label">Fecha de Incorporaci&oacute;n</h6>	
+																	</div>
+																	<div class="row d-flex align-items-center">
+																		<div class="col-1">
+																			<i class="fas fa-calendar-alt fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="date" class="form-control"
+																				th:field="*{fechaIngreso}" readonly />
+																		</div>
+																		<div class="col-1">
+																			<i class="fas fa-file-invoice fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{tipoContrato}" readonly/>
+																		</div>
+																	</div>
+																	<div class="d-flex justify-content-end">																																
+																		
+																		<a th:href="@{/profesor/list}" class="btn btn-sm academy-btn btn-4 ml-2" ><i class="fas fa-users"></i> &nbsp;Volver</a>
+																	</div>
+																	<input type="hidden" th:field="*{idprofesor}" />
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="tab-pane fade" id="tab2" role="tabpanel"
+													aria-labelledby="tab--2">
+													<div class="academy-tab-content">
+														<button id="btnAdd" class="btn btn-sm academy-btn btn-3" data-toggle="modal" data-target="#modalMatricula">
+																<i class="fas fa-plus-circle"></i>&nbsp;Nuevo</button>
+														<!-- Tab Text -->
+														<div class="academy-tab-text" id="listMatricula">
+														</div>
+													</div>
+												</div>
+												<div class="tab-pane fade" id="tab3" role="tabpanel"
+													aria-labelledby="tab--3">
+													<div class="academy-tab-content">
+														<!-- Tab Text -->
+														<div class="academy-tab-text">
+															<p>Este apartado esta diseniado para asignar las calificaciones</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<!-- Modal de matrícula -->
+	<div class="modal fade" id="modalMatricula" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Agregar nueva Aula</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div id="contentMatricula"
+					class="modal-body contact-area contact-content-modal"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm academy-btn btn-3">Guardar</button>
+					<button type="button" class="btn btn-sm academy-btn btn-2"
+						data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout :: frgFooter"></footer>
+	<div th:replace="layout :: frgScripts"></div>
+	<script th:src="@{/js/alumno/card-matricula.js}"></script>
+	<script th:src="@{/js/profesor/profesor.js}"></script>
+
+</body>
+</html>

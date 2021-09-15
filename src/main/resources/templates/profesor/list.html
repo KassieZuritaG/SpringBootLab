@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+
+<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<header th:replace="layout :: frgHeader"></header>
+
+	<div class="breadcumb-area bg-img" th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">		
+		<div class="bradcumbContent">
+			<h2>Profesores</h2>
+		</div>
+	</div>
+	
+	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+		<section class="contact-area mt-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="contact-content">
+							<div class="row">
+								<div class="col-12">
+									<div class="section-heading text-left">
+											<span>Listado</span>
+											<h4 th:text="${title}"></h4>											
+										</div>
+									<div class="contact-form-area wow fadeInUp"
+										data-wow-delay="500ms">
+									
+														
+					<table  class="table table-hover">
+						<thead class="bg-light">
+							<tr>
+								<th><i class="far fa-address-card"></i>&nbsp;C&eacute;dula</th>
+								<th><i class="fas fa-user-tie"></i>&nbsp;Nombre</th>	
+								<th><i class="fas fa-university"></i>&nbsp;T&iacute;tulo</th>	
+								<th><i class="fas fa-file-contract"></i>&nbsp;Contrato</th>		
+								<th><i class="fas fa-business-time"></i>&nbsp;Tiempo Dedicaci&oacute;n</th>						
+								
+								<th><a class="btn btn-sm academy-btn btn-3" th:href="@{/profesor/create}"><i class="fas fa-plus-circle"></i>&nbsp;Nuevo</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p : ${profesores}">
+								<td th:text="${p.cedula}"></td>
+								<td th:text="${p.nombres}"></td>
+								<td th:text="${p.titulo}"></td>
+								<td th:text="${p.tipoContrato}"></td>								
+								<td th:text="${p.tiempoDedicacion}"></td>
+								
+								<td>									
+									<a class="btn btn-xs academy-btn btn-3" th:href="@{/profesor/retrieve/} + ${p.idprofesor}"><i class="fas fa-eye"></i></a>
+									<a class="btn btn-xs academy-btn btn-2" th:href="@{/profesor/update/} + ${p.idprofesor}"><i class="fas fa-user-edit"></i></a>
+									<a class="btn btn-xs academy-btn btn-4" th:onclick="eliminar([[${p.idprofesor}]],[[${p.nombres}]])"> <i class="fas fa-trash-alt"></i></a>
+									
+									
+								</td>
+							</tr>
+						</tbody>
+					</table>
+						
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+	</div>
+	
+	
+	
+	<footer th:replace="layout :: frgFooter"></footer>
+	<div th:replace="layout :: frgScripts"></div>
+	<script th:src="@{/js/profesor/eliminar.js}"></script>
+
+</body>
+		
+</html>

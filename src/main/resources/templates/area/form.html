@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+
+	<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<header th:replace="layout :: frgHeader"></header>
+
+	<div class="breadcumb-area bg-img" th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">		
+		<div class="bradcumbContent">
+			<h2>Areas</h2>
+		</div>
+	</div>
+	
+	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+		<section class="contact-area mt-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="contact-content">
+							<div class="row">
+								<div class="col-12">
+									<span>Formulario</span>
+									<h4 th:text="${title}"></h4>
+									<div class="contact-form-area wow fadeInUp"
+										data-wow-delay="500ms">
+											<form class="user" th:action="@{/area/save}"
+												th:object="${area}" enctype="multipart/form-data" method="post">
+												<hr>
+												
+												<div class="form-group row">
+													<div class="col-1">											
+														<i class="fas fa-file-contract fa-2x"></i>												
+													</div>
+													<div class="form-group row col-sm-3">
+														<input type="text" class="form-control form-control-user"
+															th:field="*{codigo}" placeholder="C&oacute;digo">
+													</div>
+												</div>
+												
+												<div class="form-group row">
+													<div class="col-1">											
+															<i class="fas fa-layer-group fa-2x"></i>													
+													</div>
+													<div class="form-group row col-sm-6">
+														
+														<input type="text" class="form-control form-control-user"
+															th:field="*{nombre}" placeholder="Nombre">
+													</div>
+												</div>
+												<div class="form-group row">
+													<div class="col-1">											
+														<i class="fas fa-align-justify fa-2x"></i>												
+													</div>
+													<div class="form-group row col-sm-6">
+														<input type="text" class="form-control form-control-user"
+															th:field="*{descripcion}" placeholder="Descripci&oacute;n">
+													</div>
+												</div>
+												<div class="form-group row">
+													<div class="col-1">											
+														<i class="fas fa-user-tie fa-2x"></i>													
+													</div>
+													<div class="form-group row col-sm-6">
+														<input type="text" class="form-control form-control-user"
+															th:field="*{coordinador}" placeholder="Coordinador">
+													</div>
+												</div>
+												<div class="form-group row">
+													<div class="col-1">											
+														<i class="fas fa-camera fa-2x"></i>													
+													</div>
+													<div class="form-group row col-sm-6">
+														<input type="file" name="photo" id="photo" class="form-control" />
+													</div>
+												</div>
+												<hr>
+												<div class="form-group row">
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<input type="submit"
+															class="btn btn-success btn-user btn-block"
+															value="Guardar" />
+													</div>
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<a th:href="@{/area/list}"
+															class="btn btn-danger btn-user btn-block">Cancelar</a>
+													</div>
+												</div>
+
+												<input type="hidden" th:field="*{idarea}" />
+
+											</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	
+	<footer th:replace="layout :: frgFooter"></footer>
+	<div th:replace="layout :: frgScripts"></div>
+
+
+</body>
+</html>

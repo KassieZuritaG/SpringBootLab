@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+
+	<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<header th:replace="layout :: frgHeader"></header>
+
+	<div class="breadcumb-area bg-img" th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">		
+		<div class="bradcumbContent">
+			<h2>Profesores</h2>
+		</div>
+	</div>
+	
+	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+		<section class="contact-area mt-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="contact-content">
+							<div class="row">
+								<div class="col-12">
+									<span>Formulario</span>
+									<h4 th:text="${title}"></h4>
+									<div class="contact-form-area wow fadeInUp"
+										data-wow-delay="500ms">
+										<form th:action="@{/profesor/save}" th:object="${profesor}" enctype="multipart/form-data" method="post">
+											<div class="row d-flex align-items-center">
+												
+												<div class="col-5">	
+													<h4 class="label">Datos Personales</h4>												
+													
+												</div>											
+												
+											</div>
+											
+											<div class="row d-flex align-items-center">
+												<div class="col-1">											
+													<i class="fas fa-user-tie fa-2x"></i>													
+												</div>
+												<div class="col-5">													
+													<input type="text" class="form-control" th:field="*{nombres}" th:errorclass="'form-control is-invalid'" placeholder="Nombres" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}"></small>													
+												</div>											
+												<div class="col-1">											
+													<i class="fas fa-user-tie fa-2x"></i>													
+												</div>
+												<div class="col-5">													
+													<input type="text" class="form-control" th:field="*{apellidos}" th:errorclass="'form-control is-invalid'" placeholder="Apellidos" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></small>													
+												</div>
+											</div>
+											
+											<div class="row d-flex align-items-center">
+												<div class="col-1">											
+													<i class="far fa-address-card fa-2x"></i>													
+												</div>
+												<div class="col-5">													
+													<input type="text" class="form-control" th:field="*{cedula}" th:errorclass="'form-control is-invalid'" placeholder="C&eacute;dula" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"></small>													
+												</div>											
+												<div class="col-1">											
+													<i class="fas fa-at fa-2x"></i>													
+												</div>
+												<div class="col-5">													
+													<input type="text" class="form-control" th:field="*{email}" th:errorclass="'form-control is-invalid'" placeholder="Correo electr&oacute;nico" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>													
+												</div>
+											</div>
+											
+											<div class="row d-flex align-items-center">
+												<div class="col-1">											
+													<i class="fas fa-phone fa-2x"></i>													
+												</div>
+												<div class="col-5">													
+													<input type="text" class="form-control" th:field="*{telefono}" th:errorclass="'form-control is-invalid'" placeholder="Tel&eacute;fono" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>													
+												</div>											
+												<div class="col-1">																								
+													<i class="fas fa-venus-mars fa-2x"></i>													
+												</div>
+												<div class="col-5">
+													<div class="form-control">													
+														&nbsp;&nbsp;<label class="radio-inline"><input type="radio" th:field="*{sexo}" value="M" />&nbsp;&nbsp;Mujer</label>
+														&nbsp;&nbsp;&nbsp;&nbsp;<label class="radio-inline"><input type="radio" th:field="*{sexo}" value="H" />&nbsp;&nbsp;Hombre</label>
+													</div>
+												</div>
+											</div>
+											<div class="row d-flex align-items-center">
+												<div class="col-1">											
+																									
+												</div>
+												<div class="col-5">	
+													<h6 class="label">Fecha de Nacimiento</h6>												
+													
+												</div>											
+												
+											</div>
+											<div class="row d-flex align-items-center">
+											
+												<div class="col-1">											
+													<i class="fas fa-calendar-alt fa-2x"></i>													
+												</div>
+												<div class="col-5">													
+													<input type="date" class="form-control" th:field="*{fechaNacimiento}" th:errorclass="'form-control is-invalid'" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></small>													
+												</div>											
+												<div class="col-1">											
+													<i class="fas fa-map-marker-alt fa-2x"></i>													
+												</div>
+												<div class="col-5">													
+													<input type="text" class="form-control" th:field="*{lugarNacimiento}" th:errorclass="'form-control is-invalid'" placeholder="Lugar de nacimiento" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('lugarNacimiento')}" th:errors="*{lugarNacimiento}"></small>													
+												</div>
+											</div>
+											
+											<div class="row d-flex align-items-center">
+												<div class="col-1">											
+													<i class="fas fa-camera fa-2x"></i>													
+												</div>
+												<div class="col-5">													
+													<input type="file" name="photo" id="photo" class="form-control" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></small>													
+												</div>											
+												
+											</div>
+											<div class="row d-flex align-items-center">
+												
+												<div class="col-5">	
+													<h4 class="label">Datos de Incorporaci&oacute;n</h4>												
+													
+												</div>											
+												
+											</div>
+											
+											
+											<div class="row d-flex align-items-center">
+												
+												<div class="col-1">											
+													<i class="fas fa-university fa-2x"></i>													
+												</div>
+												
+												<div class="col-5">													
+													<input type="text" class="form-control" th:field="*{titulo}" th:errorclass="'form-control is-invalid'" placeholder="Titulo" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></small>													
+												</div>
+												<div class="col-1">											
+													<i class="fas fa-business-time fa-2x"></i>												
+												</div>
+																							
+												<div class="col-5">	
+													<input type="text" class="form-control" th:field="*{tiempoDedicacion}" th:errorclass="'form-control is-invalid'" placeholder="Tiempo de Dedicacion" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('tiempoDedicacion')}" th:errors="*{tiempoDedicacion}"></small>										
+																									
+												</div>
+												
+											</div>
+											<div class="row d-flex align-items-center">
+												<div class="col-1">											
+																									
+												</div>
+												<div class="col-5">	
+													<h6 class="label">Fecha de Ingreso</h6>												
+													
+												</div>											
+												
+											</div>
+											<div class="row d-flex align-items-center">
+												<div class="col-1">											
+													<i class="fas fa-calendar-alt fa-2x"></i>													
+												</div>
+												<div class="col-5">													
+													<input type="date" class="form-control" th:field="*{fechaIngreso}" th:errorclass="'form-control is-invalid'" />
+													<small class="invalid-feedback" th:if="${#fields.hasErrors('fechaIngreso')}" th:errors="*{fechaIngreso}"></small>													
+												</div>											
+												<div class="col-1">											
+													<i class="fas fa-file-invoice fa-2x"></i>											
+												</div>
+												<div class="col-5">											
+													<select  style="height: 50px"  class="form-control" th:field="*{tipoContrato}" th:errorclass="'form-control is-invalid'"  >
+														  <option value="Seleccione tipo de Contrato">---Seleccionte Tipo Contrato---</option>
+														  <option value="Tiempo Completo">Tiempo Completo</option>
+														  <option value="Tiempo Parcial">Tiempo Parcial</option>
+													</select>
+													<small  class="invalid-feedback" th:if="${#fields.hasErrors('tipoContrato')}" th:errors="*{tipoContrato}"></small>	
+												</div>
+											</div>
+											
+											
+											
+											
+											<div class="d-flex justify-content-end">																																
+												<button class="btn btn-sm academy-btn btn-3" type="submit"><i class="fas fa-save"></i> &nbsp;Guardar</button>
+												<button class="btn btn-sm academy-btn btn-2 ml-2" type="reset"><i class="fas fa-times"></i> &nbsp;Cancelar</button>
+												<a th:href="@{/profesor/list}" class="btn btn-sm academy-btn btn-4 ml-2" type="reset"><i class="fas fa-users"></i> &nbsp;Volver</a>
+											</div>
+											<input type="hidden" th:field="*{idprofesor}" />	
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	
+	<footer th:replace="layout :: frgFooter"></footer>
+	<div th:replace="layout :: frgScripts"></div>
+
+
+</body>
+</html>

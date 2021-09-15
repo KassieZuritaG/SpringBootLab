@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout :: frgHead">
+</head>
+
+<body>
+ 
+ 	<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+	
+ 	<header th:replace="layout :: frgHeader"></header>
+ 
+ 	<div class="breadcumb-area bg-img" th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">		
+		<div class="bradcumbContent">
+			<h2 id="title">Reporte</h2>
+		</div>
+	</div>
+    
+    <div class="academy-courses-area section-padding-100-0">
+        <div class="container">
+            <!-- div class="row">
+            	<canvas id="chart-area-1"></canvas>            	
+            </div> -->
+            <div class="row">
+            	<!--  canvas id="chart-area-2" style="display: block; width: 349px; height: 174px;" width="349" height="174" class="chartjs-render-monitor"></canvas>-->
+            	<canvas id="canvas" style="display: block; width: 654px; height: 327px;" width="654" height="327" class="chartjs-render-monitor"></canvas>
+            </div>
+        </div>
+    </div>
+    <br>
+
+ <footer th:replace="layout :: frgFooter"></footer>
+ <div th:replace="layout :: frgScripts"> </div>
+ <script th:src="@{/js/matricula/rpt-matriculados-materias.js}"></script>
+ 
+</body>
+
+</html>

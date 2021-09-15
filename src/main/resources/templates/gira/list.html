@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+
+<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<header th:replace="layout :: frgHeader"></header>
+
+	<div class="breadcumb-area bg-img" th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">		
+		<div class="bradcumbContent">
+			<h2>Giras</h2>
+		</div>
+	</div>
+	
+	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+		<section class="contact-area mt-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="contact-content">
+							<div class="row">
+								<div class="col-12">
+									<div class="section-heading text-left">
+											<span>Listado</span>
+											<h4 th:text="${title}"></h4>											
+										</div>
+									<div class="contact-form-area wow fadeInUp"
+										data-wow-delay="500ms">
+									
+														
+					<table  class="table table-hover">
+						<thead class="bg-light">
+							<tr>
+								<th><i class="far fa-id-badge"></i>&nbsp;Coordinador</th>
+								<th><i class="fas fa-location-arrow"></i>&nbsp;Destino</th>
+								<th><i class="fas fa-calendar-alt"></i>&nbsp;Fecha de inicio</th>								
+								<th><i class="fas fa-calendar-alt"></i>&nbsp;Fecha de fin</th>
+								<th><i class="fas fa-image"></i>&nbsp;Imagen</th>
+								<th><a class="btn btn-sm academy-btn btn-3" th:href="@{/gira/create}"><i class="fas fa-plus-circle"></i>&nbsp;Nuevo</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="g : ${Gira}">
+								<td th:text="${g.profesor.toString()}"></td>
+								<td th:text="${g.destino}"></td>								
+								<td th:text="${g.fechaInicio()}"></td>
+								<td th:text="${g.fechaFin()}"></td>
+								<td><img th:src="@{/photos/gira/} + ${g.imagen}" width="80" height="80" /></td>
+								<td>									
+									<a class="btn btn-xs academy-btn btn-3" th:href="@{/gira/retrieve/} + ${g.idgira}"><i class="fas fa-eye"></i></a>
+									<a class="btn btn-xs academy-btn btn-2" th:href="@{/gira/update/} + ${g.idgira}"><i class="fas fa-user-edit"></i></a>
+									<button th:onclick="|alertDeleteGira(${g.idgira});|" class="btn btn-xs academy-btn btn-4"><i class="fas fa-trash-alt"></i></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+									
+									
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	
+	<footer th:replace="layout :: frgFooter"></footer>
+	<div th:replace="layout :: frgScripts"></div>
+	<script th:src="@{/js/gira/delete-gira.js}"></script>
+
+</body>
+</html>

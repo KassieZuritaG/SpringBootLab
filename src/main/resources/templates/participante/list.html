@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<table class="table table-hover">
+		<thead class="bg-light">
+			<tr>
+				<th><i class="far fa-address-card"></i>&nbsp;C&eacute;dula</th>
+				<th><i class="fas fa-user-tie"></i>&nbsp;Nombre</th>
+				<th><i class="fas fa-calendar-alt"></i>&nbsp;Tipo de
+					financiamiento</th>
+				<th><i class="fas fa-calendar-alt"></i>&nbsp;Valor</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="a : ${participantes}">
+				<td th:text="${a.estudiante.cedula}"></td>
+				<td th:text="${a.estudiante}"></td>
+				<td th:text="${a.tipo_financiamiento}"></td>
+				<td th:text="${a.valor}"></td>
+				<td>
+					<button th:onclick="|onDelete(${a.idpartipante});|"
+						class="btn btn-xs academy-btn btn-4">
+						<i class="fas fa-trash-alt"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+</body>
+</html>

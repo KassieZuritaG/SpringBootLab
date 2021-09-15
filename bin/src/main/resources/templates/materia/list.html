@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body id="page-top">
+
+	<div id="wrapper">
+		<ul th:replace="layout :: frgSideBar"></ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<div id="content">
+
+				<nav th:replace="layout :: frgTopBar"></nav>
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<div
+						class="d-sm-flex align-items-center justify-content-between mb-4">
+						<h1 th:text="${title}" class="h3 mb-0 text-gray-800"></h1>
+					</div>					
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Nombre</th>								
+								<th>Cr&eacute;ditos</th>
+								<th>Nivel</th>
+								<th>&Aacute;rea</th>
+								<th>Coordinador</th>
+								<th>Semestre</th>
+								<th><a class="btn btn-sm btn-success"
+									th:href="@{/materia/create}">&nbsp;Nueva</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="ma : ${materias}">
+								<td th:text="${ma}"></td>								
+								<td th:text="${ma.creditos}"></td>
+								<td th:text="${ma.nivel}"></td>
+								<td th:text="${ma.area.nombre}"></td>
+								<td th:text="${ma.area.coordinador}"></td>
+								<td th:text="${ma.semestre}"></td>
+								<td><a class="btn btn-sm btn-warning"
+									th:href="@{/materia/update/} + ${ma.idmateria}">&nbsp;Editar</a>
+									<a class="btn btn-sm btn-info"
+									th:href="@{/materia/retrieve/} + ${ma.idmateria}">&nbsp;Ver</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			
+			<footer th:replace="layout :: frgFooter"></footer>
+
+		</div>
+
+	</div>
+	
+
+</body>
+</html>

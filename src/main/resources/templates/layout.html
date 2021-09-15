@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="frgHead">
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+<!-- Title -->
+<title>SGE - Universidad de las Fuerzas Armadas</title>
+
+<!-- Favicon -->
+<link rel="icon" th:href="@{/img/core-img/favicon.ico}">
+
+<!-- Core Stylesheet -->
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/vendor/all.min.css}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+
+</head>
+
+<body>
+	<!-- ##### Preloader ##### -->
+	<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<!-- ##### Header Area Start ##### -->
+	<header th:fragment="frgHeader" class="header-area">
+
+		<!-- Top Header Area -->
+		<div class="top-header">
+			<div class="container h-100">
+				<div class="row h-100">
+					<div class="col-12 h-100">
+						<div
+							class="header-content h-100 d-flex align-items-center justify-content-between">
+							<div class="academy-logo">
+								<a th:href="@{/index.html}"><img
+									th:src="@{/img/core-img/logo.png}" alt=""></a>
+							</div>
+							<div class="login-content" sec:authorize="isAuthenticated()">
+								<i class="fas fa-user"></i>&nbsp;<a href="#"><span
+									sec:authentication="name"></span></a>
+								<div sec:authorize="isAuthenticated()">
+									<form id="frmLogout" th:action="@{/logout}" method="post">
+										<i class="fas fa-sign-out-alt"></i>&nbsp;<a href="#"
+											onclick="document.getElementById('frmLogout').submit();">Salir</a>
+										<input type="hidden" th:name="${_csrf.parameterName}"
+											th:value="${_csrf.token}" />
+									</form>
+								</div>
+							</div>
+							<div class="login-content" sec:authorize="!isAuthenticated()">
+								<a th:href="@{/usuario/create}">Registrarse</a>&nbsp;|&nbsp;
+								<a th:href="@{/login}">Ingresar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Navbar Area -->
+		<div class="academy-main-menu">
+			<div class="classy-nav-container breakpoint-off">
+				<div class="container">
+					<!-- Menu -->
+					<nav class="classy-navbar justify-content-between" id="academyNav">
+
+						<!-- Navbar Toggler -->
+						<div class="classy-navbar-toggler">
+							<span class="navbarToggler"><span></span><span></span><span></span></span>
+						</div>
+
+						<!-- Menu -->
+						<div class="classy-menu">
+
+							<!-- close btn -->
+							<div class="classycloseIcon">
+								<div class="cross-wrap">
+									<span class="top"></span><span class="bottom"></span>
+								</div>
+							</div>
+
+							<!-- Nav Start -->
+							<div class="classynav">
+								<ul>
+									<li><a th:href="@{/index.html}">Inicio</a></li>
+									<li><a href="#">Alumnos</a>
+										<ul class="dropdown">
+											<li><a th:href="@{/alumno/create}">Nuevo registro</a></li>
+											<li><a th:href="@{/alumno/list}">Listado</a></li>
+										</ul></li>
+									<li><a href="#">Materias</a>
+										<ul class="dropdown">
+											<li><a th:href="@{/materia/create}">Nuevo registro</a></li>
+											<li><a th:href="@{/materia/list}">Listado</a></li>
+											<li><a th:href="@{/matricula/rptMatriculadosMaterias}">Matr&iacute;culas</a></li>
+											<li><a th:href="@{/matricula/rptRendimientoMaterias}">Rendimiento</a></li>
+										</ul></li>
+
+										
+									<li><a href="#">&Aacute;reas</a>
+										<ul class="dropdown">
+											<li><a th:href="@{/area/create}">Nuevo registro</a></li>
+											<li><a th:href="@{/area/list}">Listado</a></li>
+										</ul></li>
+										
+
+
+									<li><a href="#">Profesores</a>
+										<ul class="dropdown">
+											<li><a th:href="@{/profesor/create}">Nuevo registro</a></li>
+											<li><a th:href="@{/profesor/list}">Listado</a></li>											
+										</ul></li>
+
+
+                  <li><a href="#">Becas</a>
+										<ul class="dropdown">
+											<li><a th:href="@{/beca/create}">Nueva beca</a></li>
+											<li><a th:href="@{/beca/list}">Listado</a></li>
+                    </ul></li>
+
+									<li><a href="#">Giras</a>
+										<ul class="dropdown">
+											<li><a th:href="@{/gira/create}">Nuevo registro</a></li>
+											<li><a th:href="@{/gira/list}">Listado</a></li>											
+										</ul></li>
+
+									<li><a href="about-us.html">About Us</a></li>
+
+									<li><a href="course.html">Course</a></li>
+									<li><a href="contact.html">Contact</a></li>
+								</ul>
+							</div>
+							<!-- Nav End -->
+						</div>
+
+						<!-- Calling Info -->
+						<div class="calling-info">
+							<div class="call-center">
+								<a href="#"><i class="fas fa-university fa-2x"></i> <span>Certificaci&oacute;n
+										II | NRC 7618</span></a>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	
+	
+	</header>
+	<!-- ##### Header Area End ##### -->
+
+	<!-- ##### Course Area Start ##### -->
+	<div class="academy-courses-area section-padding-100-0">
+		<div class="container">
+			<div class="row">
+				<!-- Single Course Area -->
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div
+						class="single-course-area d-flex align-items-center mb-100 wow fadeInUp"
+						data-wow-delay="300ms">
+						<div class="course-icon">
+							<i class="icon-id-card"></i>
+						</div>
+						<div class="course-content">
+							<h4>Business School</h4>
+							<p>Cras vitae turpis lacinia, lacinia la cus non, fermentum
+								nisi.</p>
+						</div>
+					</div>
+				</div>
+				<!-- Single Course Area -->
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div
+						class="single-course-area d-flex align-items-center mb-100 wow fadeInUp"
+						data-wow-delay="400ms">
+						<div class="course-icon">
+							<i class="icon-worldwide"></i>
+						</div>
+						<div class="course-content">
+							<h4>Marketing</h4>
+							<p>Lacinia, lacinia la cus non, fermen tum nisi.</p>
+						</div>
+					</div>
+				</div>
+				<!-- Single Course Area -->
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div
+						class="single-course-area d-flex align-items-center mb-100 wow fadeInUp"
+						data-wow-delay="500ms">
+						<div class="course-icon">
+							<i class="icon-map"></i>
+						</div>
+						<div class="course-content">
+							<h4>Photography</h4>
+							<p>Cras vitae turpis lacinia, lacinia la cus non, fermentum
+								nisi.</p>
+						</div>
+					</div>
+				</div>
+				<!-- Single Course Area -->
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div
+						class="single-course-area d-flex align-items-center mb-100 wow fadeInUp"
+						data-wow-delay="600ms">
+						<div class="course-icon">
+							<i class="icon-like"></i>
+						</div>
+						<div class="course-content">
+							<h4>Social Media</h4>
+							<p>Cras vitae turpis lacinia, lacinia la cus non, fermentum
+								nisi.</p>
+						</div>
+					</div>
+				</div>
+				<!-- Single Course Area -->
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div
+						class="single-course-area d-flex align-items-center mb-100 wow fadeInUp"
+						data-wow-delay="700ms">
+						<div class="course-icon">
+							<i class="icon-responsive"></i>
+						</div>
+						<div class="course-content">
+							<h4>Development</h4>
+							<p>Lacinia, lacinia la cus non, fermen tum nisi.</p>
+						</div>
+					</div>
+				</div>
+				<!-- Single Course Area -->
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div
+						class="single-course-area d-flex align-items-center mb-100 wow fadeInUp"
+						data-wow-delay="800ms">
+						<div class="course-icon">
+							<i class="icon-message"></i>
+						</div>
+						<div class="course-content">
+							<h4>Design</h4>
+							<p>Cras vitae turpis lacinia, lacinia la cus non, fermentum
+								nisi.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ##### Course Area End ##### -->
+	
+	<!-- ##### Top Popular Courses Area Start ##### -->
+	<div class="top-popular-courses-area section-padding-100-70">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-heading text-center mx-auto wow fadeInUp"
+						data-wow-delay="300ms">
+						<span>The Best</span>
+						<h3>Top Popular Courses</h3>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+
+				<!-- Single Top Popular Course -->
+				<div class="col-12 col-lg-6">
+					<div
+						class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+						data-wow-delay="400ms">
+						<div class="popular-course-content">
+							<h5>Business for begginers</h5>
+							<span>By Simon Smith | March 18, 2018</span>
+							<div class="course-ratings">
+								<i class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star-o" aria-hidden="true"></i>
+							</div>
+							<p>Cras vitae turpis lacinia, lacinia lacus non, fermentum
+								nisi. Donec et sollicitudin est, in euismod.</p>
+							<a href="#" class="btn academy-btn btn-sm">See More</a>
+						</div>
+						<div class="popular-course-thumb bg-img"
+							style="background-image: url(img/bg-img/pc-1.jpg);"></div>
+					</div>
+				</div>
+
+				<!-- Single Top Popular Course -->
+				<div class="col-12 col-lg-6">
+					<div
+						class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+						data-wow-delay="500ms">
+						<div class="popular-course-content">
+							<h5>Advanced HTML5</h5>
+							<span>By Simon Smith | March 18, 2018</span>
+							<div class="course-ratings">
+								<i class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star-o" aria-hidden="true"></i>
+							</div>
+							<p>Cras vitae turpis lacinia, lacinia lacus non, fermentum
+								nisi. Donec et sollicitudin est, in euismod.</p>
+							<a href="#" class="btn academy-btn btn-sm">See More</a>
+						</div>
+						<div class="popular-course-thumb bg-img"
+							style="background-image: url(img/bg-img/pc-2.jpg);"></div>
+					</div>
+				</div>
+
+				<!-- Single Top Popular Course -->
+				<div class="col-12 col-lg-6">
+					<div
+						class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+						data-wow-delay="600ms">
+						<div class="popular-course-content">
+							<h5>Marketing 101</h5>
+							<span>By Simon Smith | March 18, 2018</span>
+							<div class="course-ratings">
+								<i class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star-o" aria-hidden="true"></i>
+							</div>
+							<p>Cras vitae turpis lacinia, lacinia lacus non, fermentum
+								nisi. Donec et sollicitudin est, in euismod.</p>
+							<a href="#" class="btn academy-btn btn-sm">See More</a>
+						</div>
+						<div class="popular-course-thumb bg-img"
+							style="background-image: url(img/bg-img/pc-3.jpg);"></div>
+					</div>
+				</div>
+
+				<!-- Single Top Popular Course -->
+				<div class="col-12 col-lg-6">
+					<div
+						class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+						data-wow-delay="700ms">
+						<div class="popular-course-content">
+							<h5>Business for begginers</h5>
+							<span>By Simon Smith | March 18, 2018</span>
+							<div class="course-ratings">
+								<i class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star" aria-hidden="true"></i> <i
+									class="fa fa-star-o" aria-hidden="true"></i>
+							</div>
+							<p>Cras vitae turpis lacinia, lacinia lacus non, fermentum
+								nisi. Donec et sollicitudin est, in euismod.</p>
+							<a href="#" class="btn academy-btn btn-sm">See More</a>
+						</div>
+						<div class="popular-course-thumb bg-img"
+							style="background-image: url(img/bg-img/pc-4.jpg);"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ##### Top Popular Courses Area End ##### -->
+
+	<!-- ##### Footer Area Start ##### -->
+	<footer th:fragment="frgFooter" class="footer-area">
+	<!-- SweetAlert -->
+		<div class="row">
+			<div class="col-12">
+				<div id="success-alert" th:if="${success != null}">
+
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+						var message = /*[[${success}]]*/
+						swal({
+							title : "Correcto",
+							text : message,
+							icon : "success",
+							button : "Aceptar",
+						});
+						/*]]>*/
+					</script>
+				</div>
+				<div id="success-error" th:if="${error != null}">
+
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+						var message = /*[[${error}]]*/
+						swal({
+							title : "Error",
+							text : message,
+							icon : "error",
+							button : "Aceptar",
+						});
+						/*]]>*/
+					</script>
+
+				</div>
+				<div id="warning-alert" th:if="${warning != null}">
+						<script th:inline="javascript">
+							/*<![CDATA[*/
+
+							var message = /*[[${warning}]]*/
+							swal({
+									text: message,
+									icon: 'warning',
+									buttons: true,
+									});
+									
+
+							/*]]>*/
+						</script>
+					</div>
+			</div>
+		</div>
+	
+	
+	
+		<div class="main-footer-area section-padding-100-0">
+			<div class="container">
+				<div class="row">
+					<!-- Footer Widget Area -->
+					<div class="col-12 col-sm-6 col-lg-3">
+						<div class="footer-widget mb-100">
+							<div class="widget-title">
+								<a href="#"><img th:src="@{/img/core-img/logo2.png}" alt=""></a>
+							</div>
+							<p>Cras vitae turpis lacinia, lacinia lacus non, fermentum
+								nisi. Donec et sollicitudin est, in euismod erat. Ut at erat et
+								arcu pulvinar cursus a eget.</p>
+							<div class="footer-social-info">
+								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+									class="fa fa-twitter"></i></a> <a href="#"><i
+									class="fa fa-dribbble"></i></a> <a href="#"><i
+									class="fa fa-behance"></i></a> <a href="#"><i
+									class="fa fa-instagram"></i></a>
+							</div>
+						</div>
+					</div>
+					<!-- Footer Widget Area -->
+					<div class="col-12 col-sm-6 col-lg-3">
+						<div class="footer-widget mb-100">
+							<div class="widget-title">
+								<h6>Usefull Links</h6>
+							</div>
+							<nav>
+								<ul class="useful-links">
+									<li><a href="#">Home</a></li>
+									<li><a href="#">Services &amp; Features</a></li>
+									<li><a href="#">Accordions and tabs</a></li>
+									<li><a href="#">Menu ideas</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!-- Footer Widget Area -->
+					<div class="col-12 col-sm-6 col-lg-3">
+						<div class="footer-widget mb-100">
+							<div class="widget-title">
+								<h6>Gallery</h6>
+							</div>
+							<div class="gallery-list d-flex justify-content-between flex-wrap">
+								<a href="#" class="gallery-img" title="Gallery Image 1">
+									<img th:src="@{/img/bg-img/gallery1.jpg}" alt="">
+								</a>
+								<a href="#" class="gallery-img" title="Gallery Image 2">
+									<img th:src="@{/img/bg-img/gallery2.jpg}" alt="">
+								</a>
+								<a href="#" class="gallery-img" title="Gallery Image 3">
+									<img th:src="@{/img/bg-img/gallery3.jpg}" alt="">
+								</a>
+								<a href="#" class="gallery-img" title="Gallery Image 4">
+									<img th:src="@{/img/bg-img/gallery4.jpg}" alt="">
+								</a>
+								<a href="#" class="gallery-img" title="Gallery Image 5">
+									<img th:src="@{/img/bg-img/gallery5.jpg}" alt="">
+								</a>
+								<a href="#" class="gallery-img" title="Gallery Image 6">
+									<img th:src="@{/img/bg-img/gallery6.jpg}" alt="">
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- Footer Widget Area -->
+					<div class="col-12 col-sm-6 col-lg-3">
+						<div class="footer-widget mb-100">
+							<div class="widget-title">
+								<h6>Contact</h6>
+							</div>
+							<div class="single-contact d-flex mb-30">
+								<i class="icon-placeholder"></i>
+								<p>4127/ 5B-C Mislane Road, Gibraltar, UK</p>
+							</div>
+							<div class="single-contact d-flex mb-30">
+								<i class="icon-telephone-1"></i>
+								<p>
+									Main: 203-808-8613 <br>Office: 203-808-8648
+								</p>
+							</div>
+							<div class="single-contact d-flex">
+								<i class="icon-contract"></i>
+								<p>office@yourbusiness.com</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom-footer-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<p>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>
+								document.write(new Date().getFullYear());
+							</script>
+							Certificaci&oacute;n II&nbsp;|&nbsp;NRC - 7618
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div id="success-alert" th:if="${success != null}">
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+						var message = /*[[${success}]]*/
+						Swal.fire({
+							title : '¡Correcto!',
+							text : message,
+							icon : 'success',
+							button : 'Aceptar'
+						})
+						/*]]>*/
+					</script>
+				</div>
+				<div id="error-alert" th:if="${error != null}">
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+						var message = /*[[${error}]]*/
+						Swal.fire({
+							title : '¡Error!',
+							text : message,
+							icon : 'error',
+							button : 'Aceptar'
+						})
+						/*]]>*/
+					</script>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+
+	</footer>
+	<!-- ##### Footer Area Start ##### -->
+
+	<!-- ##### All Javascript Script ##### -->
+	<div th:fragment="frgScripts">
+		<!-- jQuery-2.2.4 js -->
+		<script th:src="@{/js/jquery/jquery-2.2.4.min.js}"></script>
+		<!-- Popper js -->
+		<script th:src="@{/js/bootstrap/popper.min.js}"></script>
+		<!-- Bootstrap js -->
+		<script th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+		<!-- All Plugins js -->
+		<script th:src="@{/js/plugins/plugins.js}"></script>
+		<!-- Active js -->
+		<script th:src="@{/js/active.js}"></script>
+		<script th:src="@{/vendor/all.min.js}"></script>
+		<script th:src="@{/js/layout-util.js}"></script>
+		
+	</div>
+
+
+</body>
+
+</html>

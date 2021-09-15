@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+
+	<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<header th:replace="layout :: frgHeader"></header>
+
+	<div class="breadcumb-area bg-img"
+		th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">
+		<div class="bradcumbContent">
+			<h2>Areas</h2>
+		</div>
+	</div>
+
+	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+		<section class="contact-area mt-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="contact-content">
+							<div class="row">
+								<div class="col-12">
+									<div class="section-heading text-left">
+										<span>Listado</span>
+										<h4 th:text="${title}"></h4>
+									</div>
+									<div class="contact-form-area wow fadeInUp"
+										data-wow-delay="500ms">
+
+
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>C&oacute;digo</th>
+													<th>Nombre</th>
+													<th>Coordinador</th>
+													<th>Descripci&oacute;n</th>
+
+													<th><a class="btn btn-sm btn-success"
+														th:href="@{/area/create}">&nbsp;Nueva</a></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:id="'row-area-' + ${area.idarea}" th:each="area : ${areas}">
+												<td th:text="${area.codigo}"></td>
+												<td th:text="${area.nombre}"></td>								
+												<td th:text="${area.coordinador}"></td>
+												<td th:text="${area.descripcion}"></td>
+												<td>									
+												<a class="btn btn-xs academy-btn btn-3" th:href="@{/area/retrieve/} + ${area.idarea}"><i class="fas fa-eye"></i></a>
+												<a class="btn btn-xs academy-btn btn-2" th:href="@{/area/update/} + ${area.idarea}"><i class="fas fa-user-edit"></i></a>
+												<!--  <tr th:each="a : ${areas}">
+													<td th:text="${a.codigo}"></td>
+													<td th:text="${a.nombre}"></td>
+													<td th:text="${a.coordinador}"></td>
+													<td th:text="${a.descripcion}"></td>
+
+													<td><a class="btn btn-xs academy-btn btn-3"
+														th:href="@{/area/retrieve/} + ${a.idarea}"><i
+															class="fas fa-eye"></i></a> <a
+														class="btn btn-xs academy-btn btn-2"
+														th:href="@{/area/update/} + ${a.idarea}"><i
+															class="fas fa-user-edit"></i></a>-->
+														<button th:onclick="|DeleteArea(${area.idarea});|" 
+															class="btn btn-xs academy-btn btn-4">
+															<i class="fas fa-trash-alt"></i>
+														</button></td>	
+												</tr>
+											</tbody>
+										</table>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<footer th:replace="layout :: frgFooter"></footer>
+	<div th:replace="layout :: frgScripts"></div>
+	<script th:src="@{/js/area/delete-area.js}"></script>
+</body>
+</html>

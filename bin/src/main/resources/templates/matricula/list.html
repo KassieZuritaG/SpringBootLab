@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<table class="table table-hover">
+		<thead class="bg-light">
+			<tr>
+				<th><i class="fas fa-book-open"></i>&nbsp;Materia</th>
+				<th><i class="fas fa-layer-group"></i>&nbsp;Nivel</th>
+				<th><i class="fas fa-sort-numeric-up"></i>&nbsp;Cr&eacute;ditos</th>
+				<th><i class="fab fa-typo3"></i>&nbsp;Tipo</th>
+				<th><i class="fas fa-file-invoice-dollar"></i>&nbsp;Costo</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Recorrer las matrículas que tiene el estudiante -->
+			<tr th:each="ma : ${matriculas}">
+				<td th:text="${ma.curso}"></td>
+				<td th:text="${ma.curso.nivel}"></td>
+				<td th:text="${ma.curso.creditos}"></td>
+				<td th:text="${ma.tipoDesc()}"></td>
+				<td th:text="${ma.costo}"></td>				
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

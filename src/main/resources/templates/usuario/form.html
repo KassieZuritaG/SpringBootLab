@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead">
+</head>
+<body>
+
+<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<header th:replace="layout :: frgHeader"></header>
+
+
+	<div class="breadcumb-area bg-img" th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">		
+		<div class="bradcumbContent">
+			<h2>Usuarios</h2>
+		</div>
+	</div>
+
+	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+		<section class="contact-area mt-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="contact-content">
+							<div class="row">
+								<!-- Contact Information -->
+								<div class="col-12 col-lg-5">
+									<div class="contact-information wow fadeInUp"
+										data-wow-delay="400ms">
+										<div class="section-heading text-left">
+											<span>Spring Boot Security</span>
+											<h3 th:text="${title}"></h3>
+											<p class="mt-30">
+												Spring Security es un marco de autenticaci&oacute;n y
+												control de acceso potente y altamente personalizable. Es el
+												est&aacute;ndar de facto para asegurar aplicaciones basadas
+												en Spring.</p>											
+										</div>
+
+									</div>
+								</div>
+								<!-- Contact Form Area -->
+								<div class="col-12 col-lg-7">
+									<div class="contact-form-area wow fadeInUp"
+										data-wow-delay="500ms">										
+											<form th:action="@{/usuario/save}" th:object="${usuario}" method="post">
+												<div class="row d-flex align-items-center">
+													<div class="col-1">
+														<i class="fa fa-user fa-2x"></i>													
+													</div>
+													<div class="col-11">
+														<input type="text" class="form-control"
+														th:errorclass="'form-control is-invalid'"
+														th:field="*{nombre}" placeholder="Nombre de usuario" /> <small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('nombre')}"
+														th:errors="*{nombre}"></small>													
+													</div>
+												</div>
+												<div class="row d-flex align-items-center">
+													<div class="col-1">
+														<i class="fas fa-key fa-2x"></i>																											
+													</div>
+													<div class="col-11">
+														<input type="password" class="form-control"
+														th:errorclass="'form-control is-invalid'"
+														th:field="*{password}" placeholder="Password" /><small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('password')}"
+														th:errors="*{password}"></small>													
+													</div>
+												</div>
+												<div class="row d-flex align-items-center">
+													<div class="col-1">
+														<i class="far fa-address-card fa-2x"></i>																											
+													</div>
+													<div class="col-11">
+													<input type="text" class="form-control"
+														th:field="*{cedula}"
+														th:errorclass="'form-control is-invalid'"
+														placeholder="C&eacute;dula"> <small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('cedula')}"
+														th:errors="*{cedula}"></small>										
+													</div>
+												</div>
+												<div class="row d-flex align-items-center">
+													<div class="col-1">
+														<i class="fas fa-user-tie fa-2x"></i>																											
+													</div>
+													<div class="col-11">
+														<input type="text" class="form-control"
+														th:errorclass="'form-control is-invalid'"
+														th:field="*{nombres}" placeholder="Nombres" /> <small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('nombres')}"
+														th:errors="*{nombres}"></small>													
+													</div>
+												</div>
+												<div class="row d-flex align-items-center">
+													<div class="col-1">
+														<i class="fas fa-user-tie fa-2x"></i>																											
+													</div>
+													<div class="col-11">
+														<input type="text" class="form-control"
+														th:errorclass="'form-control is-invalid'"
+														th:field="*{apellidos}" placeholder="Apellidos" /> <small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('apellidos')}"
+														th:errors="*{apellidos}"></small>													
+													</div>
+												</div>	
+												<div class="d-flex justify-content-center">																																
+													<button class="btn btn-sm academy-btn btn-3" type="submit"><i class="fas fa-save"></i> &nbsp;Guardar</button>
+													<a th:href="@{/}" class="btn btn-sm academy-btn btn-2 ml-2"><i class="fas fa-times"></i> &nbsp;Cancelar</a>
+												</div>											
+												
+											</form>										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<footer th:replace="layout :: frgFooter"></footer>
+	<div th:replace="layout :: frgScripts"></div>
+</body>
+</html>

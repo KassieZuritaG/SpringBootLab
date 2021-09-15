@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<form id="frmMatricula" class="contact-form-area ml-3 mr-3" th:object="${matricula}" th:action="@{/matricula/save}" method="post">
+		<div class="row d-flex align-items-center">
+			<div class="col-1">
+				<i class="fas fa-layer-group"></i>
+			</div>
+			<div class="col-11">
+				<input type="number" id="txtNivel" onchange="searchByNivel();"  class="form-control"
+					placeholder="Seleccione el nivel" min="1" max="9" />
+			</div>
+		</div>
+		<hr>
+		<div class="row d-flex align-items-center">
+			<div class="col-1">
+				<i class="fas fa-book-open"></i>
+			</div>
+			<div class="col-11">
+				<select th:field="*{cursoid}" class="form-control invisible">
+				</select>
+			</div>
+		</div>
+		<div class="row d-flex align-items-center">
+			<div class="col-1">
+				<i class="fab fa-typo3"></i>
+			</div>
+			<div class="col-11">
+				<select th:field="*{tipo}" class="form-control">
+					<option value="P">Primera</option>
+					<option value="S">Segunda</option>
+					<option value="T">Tercera</option>
+				</select>
+			</div>
+		</div>
+		
+		<input type="hidden" th:field="*{estudianteid}" />
+		<input type="hidden" th:field="*{idmatricula}" />
+		
+	</form>
+
+
+
+</body>
+</html>

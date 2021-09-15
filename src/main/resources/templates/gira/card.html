@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+	<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<header th:replace="layout :: frgHeader"></header>
+
+	<div class="breadcumb-area bg-img"
+		th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">
+		<div class="bradcumbContent">
+			<h2>Giras</h2>
+		</div>
+	</div>
+
+	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+		<section class="contact-area mt-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="contact-content">
+							<div class="row">
+								<div class="col-12">
+									<div class="row">
+										<div class=col-10>
+											<span>Contenido</span>
+											<h4 th:text="${title}"></h4>
+										</div>
+										<div class=col-2>
+											<img th:src="@{/photos/gira/} + ${gira.imagen}" width="80" height="80" />
+										</div>
+									</div>
+
+									<!-- ##### Tabs ##### -->
+									<div class="col-12">
+										<div class="academy-tabs-content">
+											<ul class="nav nav-tabs" id="myTab" role="tablist">
+												<li class="nav-item"><a class="nav-link active"
+													id="tab--1" data-toggle="tab" href="#tab1" role="tab"
+													aria-controls="tab1" aria-selected="false">Datos
+														generales</a></li>
+											</ul>
+
+											<div class="tab-content mb-100" id="myTabContent">
+												<div class="tab-pane fade show active" id="tab1"
+													role="tabpanel" aria-labelledby="tab--1">
+													<div class="academy-tab-content">
+														<!-- Tab Text -->
+														<div class="academy-tab-text">
+															<div class="contact-form-area wow fadeInUp"
+																data-wow-delay="500ms">
+																<form th:object="${gira}" method="post">
+																	<div class="row d-flex align-items-center">
+																		<div class="col-1">
+																			<i class="fas fa-user-tie fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{Profesor.nombres}" readonly />
+																		</div>
+																		<div class="col-1">
+																			<i class="fas fa-location-arrow fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{destino}" readonly />
+																		</div>
+																	</div>
+																	<div class="row d-flex align-items-center">
+																		<div class="col-1">
+																			<i class="fas fa-calendar-alt fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{fechaInicio}" readonly />
+																		</div>
+																		<div class="col-1">
+																			<i class="fas fa-calendar-alt fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{fechaFin}" readonly />
+																		</div>
+																	</div>
+																	<div class="row d-flex align-items-center">
+																		<div class="col-1">
+																			<i class="fas fa-clipboard fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{objetivo}" readonly />
+																		</div>
+																		<div class="col-1">
+																			<i class="fas fa-camera fa-2x"></i>
+																		</div>
+																		<div class="col-5">
+																			<input type="text" class="form-control"
+																				th:field="*{imagen}" readonly />
+																		</div>
+																	</div>
+																	<div class="d-flex justify-content-end">
+																		<a th:href="@{/gira/list}"
+																			class="btn btn-sm academy-btn btn-4 ml-2" type="reset"><i
+																			class="fas fa-users"></i> &nbsp;Volver</a>
+																	</div>
+																	<input type="hidden" th:field="*{idgira}" />
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	
+
+	<footer th:replace="layout :: frgFooter"></footer>
+	<div th:replace="layout :: frgScripts"></div>
+
+</body>
+</html>

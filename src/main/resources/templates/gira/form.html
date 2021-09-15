@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+
+	<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<header th:replace="layout :: frgHeader"></header>
+
+	<div class="breadcumb-area bg-img"
+		th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">
+		<div class="bradcumbContent">
+			<h2>Giras</h2>
+		</div>
+	</div>
+
+	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+		<section class="contact-area mt-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="contact-content">
+							<div class="row">
+								<div class="col-12">
+									<span>Formulario</span>
+									<h4 th:text="${title}"></h4>
+									<div class="contact-form-area wow fadeInUp"
+										data-wow-delay="500ms">
+										<form th:action="@{/gira/save}" th:object="${Gira}"
+											enctype="multipart/form-data" method="post">
+											<div class="row d-flex align-items-center">
+												<div class="col-1"></div>
+												<div class="col-5"><i>Fecha inicio</i></div>
+												<div class="col-1"></div>
+												<div class="col-5"><i>Fecha fin</i></div>
+											</div>
+											<div class="row d-flex align-items-center">
+												<div class="col-1">
+													<i class="fas fa-calendar-alt fa-2x"></i>
+												</div>
+												<div class="col-5">
+													<input type="date" class="form-control"
+														th:field="*{fechaInicio}"
+														th:errorclass="'form-control is-invalid'" /> 
+													<small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('fechaInicio')}"
+														th:errors="*{fechaInicio}"></small>
+												</div>
+												<div class="col-1">
+													<i class="fas fa-calendar-alt fa-2x"></i>
+												</div>
+												<div class="col-5">
+													<input type="date" class="form-control"
+														th:field="*{fechaFin}"
+														th:errorclass="'form-control is-invalid'" /> 
+													<small
+														class="invalid-feedback"
+														th:if="${#fields.hasErrors('fechaFin')}"
+														th:errors="*{fechaFin}"></small>
+												</div>
+											</div>
+											<div class="row d-flex align-items-center">
+												<div class="col-1">
+													<i class="fas fa-user-tie fa-2x"></i>
+												</div>
+												<div class="col-5">
+													<select class="form-control form-control-lg" th:field="*{Profesor.idprofesor}">
+															<option value="">-- Seleccione coordinador --</option>
+															<option th:each="co : ${Profesor}" th:value="${co.idprofesor}" th:text="${co.toString()}"></option>
+													</select>
+												</div>
+												<div class="col-1">
+													<i class="fas fa-location-arrow fa-2x"></i>
+												</div>
+												<div class="col-5">
+													<input type="text" class="form-control"
+														th:field="*{destino}"
+														th:errorclass="'form-control is-invalid'"
+														placeholder="Destino" /> 
+													<small class="invalid-feedback"
+														th:if="${#fields.hasErrors('destino')}"
+														th:errors="*{destino}"></small>
+												</div>
+											</div>
+											<div class="row d-flex align-items-center">
+												<div class="col-1">
+													<i class="fas fa-clipboard fa-2x"></i>
+												</div>
+												<div class="col-5">
+													<input type="text" class="form-control"
+														th:field="*{objetivo}"
+														th:errorclass="'form-control is-invalid'"
+														placeholder="Objetivo" /> 
+													<small class="invalid-feedback"
+														th:if="${#fields.hasErrors('objetivo')}"
+														th:errors="*{objetivo}"></small>
+												</div>
+												<div class="col-1">
+													<i class="fas fa-camera fa-2x"></i>
+												</div>
+												<div class="col-5">
+													<input type="file" name="photo" id="photo"
+														class="form-control" /> 
+													<small class="invalid-feedback"
+														th:if="${#fields.hasErrors('imagen')}"
+														th:errors="*{imagen}"></small>
+												</div>
+											</div>
+											<hr>											
+											<div class="d-flex justify-content-end">
+												<button class="btn btn-sm academy-btn btn-3" type="submit">
+													<i class="fas fa-save"></i> &nbsp;Guardar
+												</button>
+												<button class="btn btn-sm academy-btn btn-2 ml-2"
+													type="reset">
+													<i class="fas fa-times"></i> &nbsp;Cancelar
+												</button>
+												<a th:href="@{/gira/list}"
+													class="btn btn-sm academy-btn btn-4 ml-2" type="reset"><i
+													class="fas fa-users"></i> &nbsp;Volver</a>
+											</div>
+											<input type="hidden" th:field="*{idgira}" />
+										</form>
+										<br>
+										<div class="row">
+											<div class="col-10">
+												<h4>Participantes</h4>												
+											</div>
+											<div class="col-2">										
+												<button class="btn btn-xs academy-btn btn-3" id="btnAdd" data-toggle="modal" data-target="#modalParticipante"><i class="fas fa-plus-circle"></i>&nbsp;Nuevo</button>
+											</div>										
+										</div>										
+										<div id="listParticipantes"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	
+	<!-- Modal de matrícula -->
+	<div class="modal fade" id="modalParticipante" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Agregar participante</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body contact-area contact-content-modal" id="contentFrmParticipante">
+				</div>
+				<div class="modal-footer">
+					<button id="btnSubmit" type="button" class="btn btn-sm academy-btn btn-3" data-dismiss="modal">Guardar</button>
+					<button type="button" class="btn btn-sm academy-btn btn-2"
+						data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+
+	<footer th:replace="layout :: frgFooter"></footer>
+	<div th:replace="layout :: frgScripts"></div>
+	<script th:src="@{/js/gira/add-participante.js}"></script>
+
+
+</body>
+</html>

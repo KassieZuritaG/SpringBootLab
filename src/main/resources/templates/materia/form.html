@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+
+<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+
+	<header th:replace="layout :: frgHeader"></header>
+
+	<div class="breadcumb-area bg-img"
+		style="background-image: url(img/bg-img/breadcumb.jpg);">
+		<div class="bradcumbContent">
+			<h2>Inicio de sesi&oacute;n</h2>
+		</div>
+	</div>
+
+	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+		<section class="contact-area mt-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="contact-content">
+							<div class="row">
+								<!-- Contact Information -->
+								<div class="col-12 col-lg-5">
+									<div class="contact-information wow fadeInUp"
+										data-wow-delay="400ms">
+										<div class="section-heading text-left">
+											<span>Framework</span>
+											<h3>Spring Boot Security</h3>
+											<p class="mt-30">
+												Spring Security es un marco de autenticaci&oacute;n y
+												control de acceso potente y altamente personalizable. Es el
+												est&aacute;ndar de facto para asegurar aplicaciones basadas
+												en Spring.</p>											
+										</div>
+
+									</div>
+								</div>
+								<!-- Contact Form Area -->
+								<div class="col-12 col-lg-7">
+									<div class="contact-form-area wow fadeInUp"
+										data-wow-delay="500ms">										
+											<form th:action="@{/login}" method="post">
+												<div class="row d-flex align-items-center">
+													<div class="col-1">
+														<i class="fa fa-user fa-2x"></i>													
+													</div>
+													<div class="col-11">
+														<input type="text" class="form-control"name="username" id="username" placeholder="Usuario"/>													
+													</div>
+												</div>
+												<div class="row d-flex align-items-center">
+													<div class="col-1">
+														<i class="fas fa-key fa-2x"></i>																											
+													</div>
+													<div class="col-11">
+														<input type="password" class="form-control" name="password" id="password" placeholder="Password"/>													
+													</div>
+												</div>	
+												<div class="d-flex justify-content-center">																																
+													<button class="btn btn-sm academy-btn btn-3" type="submit"><i class="fas fa-sign-in-alt"></i> &nbsp;Ingresar</button>
+													<button class="btn btn-sm academy-btn btn-2 ml-2" type="reset"><i class="fas fa-times"></i> &nbsp;Cancelar</button>
+												</div>												
+												<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+											</form>										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<footer th:replace="layout :: frgFooter"></footer>
+	<div th:replace="layout :: frgScripts"></div>
+
+
+
+
+
+<div class="p-5">
+											<div class="text-center">
+												<h1 th:text="${title}" class="h4 text-gray-900 mb-4"></h1>
+											</div>
+											<form class="user" th:action="@{/materia/save}"
+												th:object="${materia}" method="post">
+												<hr>
+												<div class="form-group row">
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<input type="text" class="form-control form-control-user"
+															th:field="*{nrc}" placeholder="NRC">
+													</div>
+												</div>
+												<div class="form-group row col-sm-6">
+													<input type="text" class="form-control form-control-user"
+														th:field="*{nombre}" placeholder="Nombre">
+												</div>
+												<div class="form-group row">
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<input type="number" min="2" max="10"
+															class="form-control form-control-user"
+															th:field="*{creditos}" placeholder="Cr&eacute;ditos">
+													</div>
+												</div>
+												<div class="form-group row">
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<input type="number" min="1" max="9"
+															class="form-control form-control-user"
+															th:field="*{nivel}" placeholder="Nivel">
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<h6>&Aacute;rea</h6>
+														<select class="form-control" th:field=*{area.idarea}>
+															<option value=0>-- Seleccione --</option>
+															<option th:each="ar : ${areas}" th:value="${ar.idarea}"
+																th:text="${ar.nombre}"></option>
+														</select>
+													</div>
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<h6>Semestre</h6>
+														<select class="form-control" th:field=*{semestre.idsemestre}>
+															<option value=0>-- Seleccione --</option>
+															<option th:each="sr : ${semestres}" 
+																th:value="${sr.idsemestre}"
+																th:text="${sr}"></option>
+														</select>
+													</div>
+												</div>
+
+												<hr>
+												<div class="form-group row">
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<input type="submit"
+															class="btn btn-success btn-user btn-block"
+															value="Guardar" />
+													</div>
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<a th:href="@{/materia/list}"
+															class="btn btn-danger btn-user btn-block">Cancelar</a>
+													</div>
+												</div>
+
+												<input type="hidden" th:field="*{idmateria}" />
+
+											</form>
+										</div>
+
+
+
+</body>
+</html>
